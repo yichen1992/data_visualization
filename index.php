@@ -139,12 +139,12 @@
                     legend: 'top'
                 };
                 
-                //console.log(options_update);
+                console.log(options_update);
                 
                 chart.draw(view, options_update);
                
                 if (currentCol < howManyColumns) {
-                    setTimeout(updateChart, 1000);
+                    setTimeout(updateChart, 40);
                 }
             }
             
