@@ -22,7 +22,7 @@
         }*/
         
         function drawChart() {
-            var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1cK0UPWvmf23iK3qu3QXrpgcsammpZseROuCN5oHFdO0/edit#gid=0&headers=1');
+            var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1NfunRiZRRILwgnohdwEFMclL7dCe56Fa_mY5Qd6_H-0/edit#gid=0&headers=1');
             // query.setQuery('SELECT A, B, C, D, E, F');
             query.setQuery('SELECT * LIMIT 366');
             query.send(handleQueryResponse);
@@ -48,16 +48,13 @@
             var arr = [0,1,2];
             var howManyColumns = raw_data.getNumberOfColumns();     // exclude first three columns
             // console.log("columns in sheet are "+howManyColumns);
-            var year = 1995;
+            var year = 1994;
             var seriesObj = {           // set it as a global object
                 0: { type: 'bars', color: 'white', enableInteractivity: false },    // min value 
                 1: { type: 'bars', color: '#aa7243' }                               // historic range
             };
             
             function updateChart() {
-                // year calculator
-                console.log(year);
-                year++;
                 // this is a counter that 
                 var counter = 0;
                 // currentCol % 3 === 0 --> it is a temperature input, corresponding to seriesObj[currentCol - 1]
@@ -126,7 +123,7 @@
                 
                 var options_update = {
                     height: 600,
-                    width: 1500,
+                    width: 1300,
                     seriesType: 'bars',
                     isStacked: true,
                     series: seriesObj,
@@ -136,16 +133,24 @@
                     vAxis: { 
                         gridlines: { count: 6, color: 'white' } 
                     },
-                    legend: 'top'
+                    legend: 'none'
                 };
                 
-                console.log(options_update);
+               
                 
                 chart.draw(view, options_update);
-               
+                
+                year++;
+                
                 if (currentCol < howManyColumns) {
-                    setTimeout(updateChart, 40);
+                    setTimeout(updateChart, 1000);
+                    setTimeout(updateYear, 1000);
                 }
+            }
+            
+            function updateYear() {
+                document.getElementById("year").innerHTML = "year: "+year;
+                
             }
             
             updateChart();
@@ -153,10 +158,34 @@
             
         }
         </script>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+                font-family: 'Open Sans', sans-serif;
+            }
+            body{
+                min-width: 1000px;
+            }
+            .titleClass1 {
+                margin-top: 30px;
+                text-align: center;
+                font-weight: 300;
+                font-size:   2.5em;
+            }
+            .titleClass2 {
+                margin-top: 20px;
+                text-align: center;
+                font-weight: 300;
+                font-size: 1.9em;
+            }
+        </style>
     </head>
  
   <body>
- 
+    <h1 class = "titleClass1">Miami Daily Average Temperature from 1996 to 2016</h1>
+    <h2 class = "titleClass2" id="year">year: 1995</h2>
     <!--Div that will hold the chart-->
     <div id="chart_div"></div>
 </html>

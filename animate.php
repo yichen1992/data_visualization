@@ -141,8 +141,8 @@
           drawChart(view,update_options);
           i++;
           if( i < howManyTimes ){
-              setTimeout( updateChart, 80 );
-              setTimeout( updateYear(i), 80 );
+              setTimeout( updateChart, 50 );
+              setTimeout( updateYear(i), 50 );
           }
       }
       function updateYear(i) {
